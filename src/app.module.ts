@@ -5,7 +5,12 @@ import { AppService } from './app.service';
 import { SuperHerosModule } from './super-heros/super-heros.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), SuperHerosModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    SuperHerosModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
