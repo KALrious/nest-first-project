@@ -10,4 +10,9 @@ export class SuperHerosController {
   retrieveAll(): SuperHeros[] {
     return this.superHeroService.retrieveAll();
   }
+
+  @Get('favorite')
+  retrieveFavorite(): SuperHeros {
+    return this.superHeroService.retrieveFavorite();
+  }
 }
