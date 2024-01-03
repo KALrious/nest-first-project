@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { DogController } from './dog/dog.controller';
 import { DogService } from './dog/dog.service';
 import { BirdModule } from './bird/bird.module';
+import { DogModule } from './dog/dog.module';
 
 @Module({
-  imports: [BirdModule],
+  imports: [BirdModule, DogModule],
   controllers: [AppController, DogController],
   providers: [AppService, DogService],
 })
