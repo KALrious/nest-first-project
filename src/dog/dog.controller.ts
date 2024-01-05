@@ -1,11 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
-import { DogService } from './dog.service';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { Tail } from './tail/tail';
 
 @Controller('dog')
 export class DogController {
-  constructor(private readonly dogService: DogService) {}
+  constructor(@Inject('TAIL') tail: Tail) {}
   @Get('all')
   findAll(): Promise<string[]> {
-    return this.dogService.findAll();
+    return this.tail;
   }
 }
