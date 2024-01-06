@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { BirdService } from '../bird/bird.service';
+import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 
 @Injectable()
-export class CommonService {
-  constructor(private readonly birdService: BirdService) {}
+export class CommonService implements OnApplicationShutdown {
+  onApplicationShutdown(signal?: string) {
+    console.log('application shut down', signal);
+  }
 }
