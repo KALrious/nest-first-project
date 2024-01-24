@@ -5,9 +5,8 @@ import { AppService } from './app.service';
 import { BirdModule } from './bird/bird.module';
 import { DogController } from './dog/dog.controller';
 import { DogModule } from './dog/dog.module';
-import { User } from './user/entities/user.entity';
-import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -20,8 +19,8 @@ import { UserModule } from './user/user.module';
       username: 'root',
       password: 'root',
       database: 'test',
-      entities: [User],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     UserModule,
   ],
