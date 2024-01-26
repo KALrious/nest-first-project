@@ -21,6 +21,7 @@ import { UserService } from './user/user.service';
       database: 'test',
       synchronize: true,
       autoLoadEntities: true,
+      migrations: ['../migrations/*.js'],
     }),
     UserModule,
   ],
