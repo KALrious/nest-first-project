@@ -1,38 +1,13 @@
-import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { redisStore } from 'cache-manager-redis-store';
-import { RedisClientOptions } from 'redis';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BirdModule } from './bird/bird.module';
 import { DogController } from './dog/dog.controller';
 import { DogModule } from './dog/dog.module';
-import { UserModule } from './user/user.module';
 import { UserService } from './user/user.service';
 
 @Module({
-  imports: [
-    BirdModule,
-    DogModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'test',
-      synchronize: true,
-      autoLoadEntities: true,
-      migrations: ['../migrations/*.js'],
-    }),
-    CacheModule.register<RedisClientOptions>({
-      store: redisStore,
-      host: 'localhost',
-      port: 6666,
-    }),
-    UserModule,
-  ],
+  imports: [BirdModule, DogModule],
   controllers: [AppController, DogController],
   providers: [AppService, UserService],
 })
