@@ -1,11 +1,6 @@
-import {
-  Controller,
-  Get,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ForbiddenException } from '../error/FrobiddenException';
+import { CreateDogDto } from './CreateDogDto';
 import { DogService } from './dog.service';
 
 @Controller('dog')
@@ -17,16 +12,18 @@ export class DogController {
   }
 
   @Get(':id')
-  finddById(
-    @Param(
-      'id',
-      new ParseIntPipe({
-        errorHttpStatusCode: HttpStatus.FORBIDDEN,
-      }),
-    )
+  findById(
+    @Param('id')
     id: number,
   ): string {
     console.log(id);
+    console.log(typeof id === 'number');
     return `id: ${id}`;
+  }
+
+  @Post('add')
+  addDog(@Body() createDogDto: CreateDogDto): string {
+    console.log(createDogDto);
+    return `id: ${createDogDto.name}`;
   }
 }
