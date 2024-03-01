@@ -4,6 +4,9 @@ describe('DogService', () => {
   let service: DogService;
 
   beforeEach(async () => {
+    jest.mock('./bdd.ts', () => ({
+      allDog: jest.fn(() => ['malko']),
+    }));
     service = new DogService();
   });
 

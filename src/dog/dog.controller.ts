@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ForbiddenException } from '../error/FrobiddenException';
 import { CreateDogDto } from './CreateDogDto';
 import { DogService } from './dog.service';
 
@@ -8,7 +7,7 @@ export class DogController {
   constructor(private readonly dogService: DogService) {}
   @Get('all')
   findAll(): Promise<string[]> {
-    throw new ForbiddenException();
+    return this.dogService.findAll();
   }
 
   @Get(':id')

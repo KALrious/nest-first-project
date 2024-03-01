@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { ALL_DOG } from './bdd';
+import dog from './bdd';
 
 @Injectable()
 export class DogService {
   constructor() {}
   async findAll(): Promise<string[]> {
-    return Promise.resolve(ALL_DOG);
+    return Promise.resolve(dog.allDog());
   }
 }

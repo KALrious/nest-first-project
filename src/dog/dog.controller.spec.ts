@@ -10,8 +10,14 @@ describe('DogController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [DogController],
       providers: [DogService],
-    }).compile();
-
+    })
+      .useMocker((token) => {
+        if (token === DogService) {
+          return { findAll: jest.fn().mockRejectedValue(['caramel']) };
+        }
+        return new Mock():
+      })
+      .compile();
     controller = module.get<DogController>(DogController);
     service = module.get<DogService>(DogService);
   });
@@ -19,5 +25,14 @@ describe('DogController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-  describe('findAll', () => {});
+  describe('findAll', () => {
+    it('should return array of dog', async () => {
+      const spyDog = jest
+        .spyOn(service, 'findAll')
+        .mockImplementation(() => Promise.resolve(['malko']));
+      const result = await controller.findAll();
+      expect(spyDog).toHaveBeenCalledTimes(1);
+      expect(result).toStrictEqual(['malko']);
+    });
+  });
 });
