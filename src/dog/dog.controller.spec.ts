@@ -15,7 +15,6 @@ describe('DogController', () => {
         if (token === DogService) {
           return { findAll: jest.fn().mockRejectedValue(['caramel']) };
         }
-        return new Mock():
       })
       .compile();
     controller = module.get<DogController>(DogController);
