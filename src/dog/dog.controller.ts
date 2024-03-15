@@ -1,11 +1,9 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../guards/auth.guard';
-import { Roles } from '../guards/roles';
 import { CreateDogDto } from './CreateDogDto';
 import { DogService } from './dog.service';
 
 @Controller('dog')
-@UseGuards(new AuthGuard())
 export class DogController {
   constructor(private readonly dogService: DogService) {}
   @Get('all')
@@ -24,7 +22,7 @@ export class DogController {
   }
 
   @Post('add')
-  @Roles(['admin'])
+  @UseGuards(AuthGuard)
   addDog(@Body() createDogDto: CreateDogDto): string {
     console.log(createDogDto);
     return `id: ${createDogDto.name}`;
