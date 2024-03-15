@@ -15,6 +15,6 @@ export class RolesGuard implements CanActivate {
     }
     const request = context.switchToHttp().getRequest();
     const user = request.user;
-    return roles.map((role) => user.include());
+    return roles.some((role) => user.roles.include(role));
   }
 }
