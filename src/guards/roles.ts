@@ -1,3 +1,6 @@
-import { Reflector } from '@nestjs/core';
+import { SetMetadata } from '@nestjs/common';
+import { Claim } from './claim.enum';
 
-export const Roles = Reflector.createDecorator<string[]>();
+export const PERMISSION_KEY = 'pr_key';
+export const Permissions = (...permissions: Claim[]) =>
+  SetMetadata(PERMISSION_KEY, permissions);

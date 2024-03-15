@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../guards/auth.guard';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Claim } from '../guards/claim.enum';
+import { Permissions } from '../guards/roles';
 import { CreateDogDto } from './CreateDogDto';
 import { DogService } from './dog.service';
 
@@ -22,7 +23,7 @@ export class DogController {
   }
 
   @Post('add')
-  @UseGuards(AuthGuard)
+  @Permissions(Claim.READ, Claim.WRIGHT)
   addDog(@Body() createDogDto: CreateDogDto): string {
     console.log(createDogDto);
     return `id: ${createDogDto.name}`;
